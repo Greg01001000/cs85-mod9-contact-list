@@ -2,11 +2,11 @@
 @extends('layout')
 
 {{-- Set the page title --}}
-@section('title', 'Add Contact - Prototype')
+@section('title', 'Edit Contact - Prototype')
 
 {{-- Define the main content --}}
 @section('content')
-    <h1>Add Contact</h1>     
+    <h1>Edit Contact</h1>     
     <form method="POST" action="/contacts"> 
         @csrf 
         
@@ -16,7 +16,7 @@
                 name="name"  
                 id="name"  
                 class="form-control @error('name') is-invalid @enderror" 
-                value="Lastname, Firstname" 
+                value="{{ old('name') }}" 
                 required> 
             
             {{-- Display field-specific error --}} 
@@ -33,7 +33,7 @@
                 name="email"  
                 id="email"  
                 class="form-control @error('email') is-invalid @enderror" 
-                value="name@provider.com" 
+                value="{{ old('email') }}" 
                 required> 
             
             @error('email') 
@@ -49,7 +49,7 @@
                 name="phone"  
                 id="phone"  
                 class="form-control @error('phone') is-invalid @enderror" 
-                value="(123) 456-7890" 
+                value="{{ old('phone') }}" 
                 required> 
             
             @error('phone') 
@@ -59,6 +59,6 @@
             @enderror 
         </div> 
         
-        <button type="submit" class="btn btn-primary">Add Contact</button> 
+        <button type="submit" class="btn btn-primary">Edit Contact</button> 
     </form> 
 @endsection
