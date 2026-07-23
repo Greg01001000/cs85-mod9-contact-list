@@ -7,6 +7,11 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
+    // Validation patterns for store() and update()
+    private const NAME_RULE = ['required', 'string', 'max:42', 'regex:/^[\p{L}\p{M}\s\'-,]+$/u'];
+    private const EMAIL_RULE = 'required|email|unique:contacts,email';
+    private const PHONE_RULE = ['required', 'string', 'regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/'];
+
     /**
      * Display a listing of the resource.
      */
@@ -31,9 +36,9 @@ class ContactController extends Controller
     {
         // First, validate the incoming data 
         $validatedData = $request->validate([ 
-            'name' => ['required', 'string', 'max:42', 'regex:/^[\p{L}\p{M}\s\'-,]+$/u'],
-            'email' => ['required', 'email', 'unique:contacts,email'],
-            'phone' => ['required', 'string', 'regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/'],
+            'name' => self::NAME_RULE,
+            'email' => self::EMAIL_RULE,
+            'phone' => self::PHONE_RULE,
         ]);  
         
         // If validation passes, create the new contact 
@@ -79,9 +84,9 @@ class ContactController extends Controller
         // Validate the incoming changes, don't reject validation if user submits same
         // email as before
         $validatedData = $request->validate([ 
-            'name' => ['required', 'string', 'max:42', 'regex:/^[\p{L}\p{M}\s\'-,]+$/u'],
-            'email' => ['required', 'email', 'unique:contacts,email,' . $id],
-            'phone' => ['required', 'string', 'regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/'],
+            'name' => self::NAME_RULE,
+            'email' => (self::EMAIL_RULE . ',' . $id),
+            'phone' => self::PHONE_RULE,
         ]); 
 
         
