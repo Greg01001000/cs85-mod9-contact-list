@@ -62,21 +62,15 @@ This file is our "master layout" - other pages will extend this template.
         --}}
         
         {{-- Show Contacts link --}}
-        <a href="{{ route('show.index') }}" 
-           class="{{ request()->routeIs('show.*') ? 'active' : '' }}">
-           Show Contacts
+        <a href="{{ route('contacts.index') }}" 
+           class="{{ request()->routeIs('contacts.index') ? 'active' : '' }}">
+           Show All Contacts
         </a>
         
         {{-- Add Contact link --}}
-        <a href="{{ route('add') }}" 
-           class="{{ request()->routeIs('add') ? 'active' : '' }}">
-           Add Contact
-        </a>
-        
-        {{-- Edit Contact link --}}
-        <a href="{{ route('edit') }}" 
-           class="{{ request()->routeIs('edit') ? 'active' : '' }}">
-           Edit Contact
+        <a href="{{ route('contacts.create') }}" 
+           class="{{ request()->routeIs('contacts.create') ? 'active' : '' }}">
+           Add a Contact
         </a>
         
         {{--

@@ -31,9 +31,9 @@ class ContactController extends Controller
     {
         // First, validate the incoming data 
         $validatedData = $request->validate([ 
-            'name' => 'required|string|max:42|regex:/^[\p{L}\p{M}\s\'-]+$/', 
-            'email' => 'required|email|unique:contacts,email', 
-            'phone' => 'required|string|regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/' 
+            'name' => ['required', 'string', 'max:42', 'regex:/^[\p{L}\p{M}\s\'-,]+$/u'],
+            'email' => ['required', 'email', 'unique:contacts,email'],
+            'phone' => ['required', 'string', 'regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/'],
         ]);  
         
         // If validation passes, create the new contact 
@@ -79,9 +79,9 @@ class ContactController extends Controller
         // Validate the incoming changes, don't reject validation if user submits same
         // email as before
         $validatedData = $request->validate([ 
-            'name' => 'required|string|max:42|regex:/^[\p{L}\p{M}\s\'-]+$/', 
-            'email' => 'required|email|unique:contacts,email,$id', 
-            'phone' => 'required|string|regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/' 
+            'name' => ['required', 'string', 'max:42', 'regex:/^[\p{L}\p{M}\s\'-,]+$/u'],
+            'email' => ['required', 'email', 'unique:contacts,email,' . $id],
+            'phone' => ['required', 'string', 'regex:/^\+?[0-9]{1,3}[\s-]?(?:\([0-9]{1,4}\)|[0-9]{1,4})[\s-]?[0-9\s-]{4,}$/'],
         ]); 
 
         

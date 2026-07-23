@@ -1,5 +1,5 @@
 {{-- Extend the master layout --}}
-@extends('layout')
+@extends('layouts.layout')
 
 {{-- Set the page title --}}
 @section('title', 'Edit Contact - Prototype')
@@ -7,8 +7,9 @@
 {{-- Define the main content --}}
 @section('content')
     <h1>Edit Contact</h1>     
-    <form method="POST" action="/contacts"> 
-        @csrf 
+    <form action="{{ route('contacts.update', $contact->id) }}" method="POST">
+        @csrf
+        @method('PUT')
         
         <div class="form-group"> 
             <label for="name">Name</label> 
@@ -16,7 +17,7 @@
                 name="name"  
                 id="name"  
                 class="form-control @error('name') is-invalid @enderror" 
-                value="{{ old('name') }}" 
+                value="{{ $contact->name }}" 
                 required> 
             
             {{-- Display field-specific error --}} 
@@ -33,7 +34,7 @@
                 name="email"  
                 id="email"  
                 class="form-control @error('email') is-invalid @enderror" 
-                value="{{ old('email') }}" 
+                value="{{ $contact->email }}" 
                 required> 
             
             @error('email') 
@@ -49,7 +50,7 @@
                 name="phone"  
                 id="phone"  
                 class="form-control @error('phone') is-invalid @enderror" 
-                value="{{ old('phone') }}" 
+                value="{{ $contact->phone }}" 
                 required> 
             
             @error('phone') 

@@ -1,5 +1,5 @@
 {{-- Extend the master layout --}}
-@extends('layout')
+@extends('layouts.layout')
 
 {{-- Set the page title --}}
 @section('title', 'Add Contact - Prototype')
@@ -16,7 +16,7 @@
                 name="name"  
                 id="name"  
                 class="form-control @error('name') is-invalid @enderror" 
-                value="Lastname, Firstname" 
+                value="{{ old('name', 'Lastname, Firstname') }}" 
                 required> 
             
             {{-- Display field-specific error --}} 
@@ -33,7 +33,7 @@
                 name="email"  
                 id="email"  
                 class="form-control @error('email') is-invalid @enderror" 
-                value="name@provider.com" 
+                value="{{ old('email', 'name@provider.com') }}" 
                 required> 
             
             @error('email') 
@@ -49,7 +49,7 @@
                 name="phone"  
                 id="phone"  
                 class="form-control @error('phone') is-invalid @enderror" 
-                value="(123) 456-7890" 
+                value="{{ old('phone', '123-456-7890') }}" 
                 required> 
             
             @error('phone') 
